@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>all restaurants</title>
+</head>
+<body>
+  <nav>
+    <a href="/">home</a> | 
+    <a href="/restaurants">restaurants</a>
+  </nav>
+
+  <h1>all restaurants</h1>
+
+  <ul>
+    <% restaurants.forEach(restaurant => { %>
+      <li>
+        <a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %></a>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>

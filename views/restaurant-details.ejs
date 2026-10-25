@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>restaurant details</title>
+</head>
+<body>
+  <nav>
+    <a href="/">home</a> | 
+    <a href="/restaurants">restaurants</a>
+  </nav>
+
+  <h1>restaurant details</h1>
+
+  <h2><%= restaurant.name %></h2>
+  <p><strong>address:</strong> <%= restaurant.address %></p>
+  <p><strong>open:</strong> <%= restaurant.isOpen ? 'Yes' : 'No' %></p>
+  <p><strong>phone number:</strong> <%= restaurant.phone %></p>
+
+  <br>
+  <a href="/restaurants">back to restaurants</a>
+</body>
+</html>
