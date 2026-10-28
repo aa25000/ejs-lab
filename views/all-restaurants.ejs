@@ -1,23 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>all restaurants</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <nav>
-    <a href="/">home</a> | 
-    <a href="/restaurants">restaurants</a>
-  </nav>
+    <%- include('./partials/navbar') %>
 
-  <h1>all restaurants</h1>
+    <h1>All Restaurants</h1>
 
-  <ul>
-    <% restaurants.forEach(restaurant => { %>
-      <li>
-        <a href="/restaurants/<%= restaurant.id %>"><%= restaurant.name %></a>
-      </li>
-    <% }) %>
-  </ul>
+    <% for(let oneRestaurant of restaurants) {%>
+
+        <p>Name: <%= oneRestaurant.name %> </p>
+        <a href="/restaurants/<%= oneRestaurant.id %>">See details</a>
+
+    <% } %>
+
 </body>
 </html>

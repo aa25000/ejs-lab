@@ -1,70 +1,110 @@
-const express = require('express');
-const app = express();
 
-app.set('view engine', 'ejs');
+const express = require("express")
+const app = express()
 
+// DATABASE
 const restaurants = [
   {
     id: 1,
-    name: "Al Baik",
-    address: "Road 3803, Manama",
+    name: 'Al Baik',
     isOpen: true,
-    phone: "+973 1700 0000"
+    address: 'City Centre Road 4650, Manama',
+    phone: '55509876',
+    menu: [
+      {
+        name: 'Chicken Filtet Sandwich',
+        price: .750,
+        rating: 5
+      },
+      {
+        name: 'Fish Filet Sandwich',
+        price: .900,
+        rating: 5
+      },
+      {
+        name: 'Chicken Nuggets',
+        price: 1.8,
+        rating: 4.9
+      },
+    ]
   },
   {
     id: 2,
     name: "Haji's Traditional Cafe",
-    address: "Bab Al Bahrain, Manama",
     isOpen: false,
-    phone: "+973 1721 0407"
+    address: '150 شارع الحكومة, Manama',
+    phone: '06892543',
+    menu: [
+      {
+        name: 'Chicken Machboos',
+        price: 2.2,
+        rating: 4.5,
+      },
+      {
+        name: 'Balaleet',
+        price: 1.8,
+        rating: 5,
+      },
+      {
+        name: 'Cheese Omlette',
+        price: .7,
+        rating: 5,
+      },
+    ]
   },
   {
     id: 3,
-    name: "Al Jabriya Turkish Restaurant",
-    address: "Jabriya, Capital Governorate",
+    name: 'Al Jabriya Turkish Restaurant',
     isOpen: true,
-    phone: "+973 1769 0000"
+    address: 'Rd No 2643, Busaiteen',
+    phone: '17330108',
+    menu: [
+      {
+        name: 'Roosy Sarookh',
+        price: 1.8,
+        rating: 5,
+      },
+      {
+        name: 'Cheese Pizza',
+        price: 2.5,
+        rating: 3.5,
+      },
+      {
+        name: 'French Fries',
+        price: 1.2,
+        rating: 4.3,
+      },
+    ]
   }
 ];
 
-app.get('/', (req, res) => {
-  res.render('homepage');
-});
+app.use(express.static('public'));
 
-app.get('/restaurants', (req, res) => {
-  res.render('all-restaurants', { restaurants: restaurants });
-});
 
-app.get('/restaurants/:id', (req, res) => {
-  const restaurantId = Number(req.params.id);
-  const foundRestaurant = restaurants.find(r => r.id === restaurantId);
+// Routes go here
 
-  res.render('restaurant-details', { restaurant: foundRestaurant });
-});
+app.get('/', (req, res)=>{
+    res.render('homepage.ejs')
+})
 
 
 
+app.get('/restaurants',(req,res)=>{
+    res.render('all-restaurants.ejs',{restaurants: restaurants})
+})
 
+app.get('/restaurants/:restaurantId',(req,res)=>{
 
-app.use(express.static('public')); 
+    const foundRestaurant = restaurants.find((oneRestaurant)=>{
+        return oneRestaurant.id === Number(req.params.restaurantId)
+    })
 
+    console.log(foundRestaurant)
 
-
-
-
-
-
-
-
- 
- 
- 
-
-
+    res.render('restaurant-details.ejs', {restaurant: foundRestaurant})
+})
 
 
 app.listen(3000,()=>{
     console.log("Listening on port " + 3000)
-}) 
-
-
+})
